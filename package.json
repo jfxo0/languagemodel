@@ -1,0 +1,19 @@
+{
+  "name": "languagemodel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node --env-file=.env chat.js",
+    "start": "node --env-file=.env --watch server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@langchain/core": "^1.1.42",
+    "@langchain/openai": "^1.4.5",
+    "express": "^5.2.1"
+  }
+}

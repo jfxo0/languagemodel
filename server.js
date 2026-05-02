@@ -23,7 +23,7 @@ app.post("/api/chat", async (req, res) => {
         res.json(result);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: "Er ging iets mis met de chatbot" });
     }
 });
 

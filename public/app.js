@@ -16,7 +16,7 @@ function addMessage(text, sender, tokens = null) {
     const safeHtml = DOMPurify.sanitize(micromark(String(text)));
 
     wrapper.innerHTML = `
-    <div class="chat-bubble">
+    <div class="chat-bubble bg-pink-200 text-black">
       ${safeHtml}
       ${tokens ? `<div class="text-xs opacity-60 mt-1">Tokens: ${tokens}</div>` : ""}
     </div>

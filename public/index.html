@@ -11,32 +11,31 @@
 
 </head>
 
-<body>
-    <div class="flex flex-col h-screen max-w-2xl mx-auto p-4">
+<body class="bg-[url('/background.gif')] bg-no-repeat bg-cover bg-center">
+    <div class="flex flex-col h-screen bg-transparent border-2 max-w-2xl mx-auto p-4">
 
-        <!-- Header -->
+
         <div class="mb-4">
-            <h1 class="text-2xl font-bold">Honor of Kings Guide</h1>
-            <p class="text-sm opacity-70">
+            <h1 class="text-2xl font-bold text-fuchsia-900">Honor of Kings Guide</h1>
+            <p class="text-sm opacity-70 text-black">
                 Ask advice over heroes, builds en strategy
             </p>
         </div>
 
-        <!-- Chat -->
-        <div id="messages" class="flex-1 overflow-y-auto space-y-2 mb-4">
+
+        <div id="messages" class="flex-1  overflow-y-auto space-y-2 mb-4">
 
             <div class="chat chat-start">
-                <div class="chat-bubble">
+                <div class="chat-bubble bg-pink-200 text-black">
                     Hey! I'm your coach. Which hero do you play?
                 </div>
             </div>
 
         </div>
 
-        <!-- Input -->
-        <form id="chatForm" class="flex gap-2">
+        <form id="chatForm" class="flex gap-2 ">
             <input id="promptInput" type="text" placeholder="Ask a question related to Honor of Kings..."
-                class="input input-bordered w-full" />
+                class="input input-bordered w-full bg-pink-200 text-black" />
             <button id="sendButton" class="btn btn-primary">
                 Send
             </button>

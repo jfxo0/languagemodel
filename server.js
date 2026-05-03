@@ -11,20 +11,9 @@ app.get("/api/test", (req, res) => {
 });
 
 app.post("/api/chat", async (req, res) => {
-    try {
-        const { prompt } = req.body;
-
-        if (!prompt) {
-            return res.status(400).json({ error: "Prompt is verplicht" });
-        }
-
-        const result = await callOpenAI(prompt);
-
-        res.json(result);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Er ging iets mis met de chatbot" });
-    }
+    const { prompt } = req.body
+    const response = await callOpenAI(prompt)
+    res.json(response);
 });
 
 

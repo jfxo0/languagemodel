@@ -7,22 +7,31 @@ const messages = document.getElementById("messages");
 const button = document.getElementById("sendButton");
 
 function addMessage(text, sender, tokens = null) {
-    const wrapper = document.createElement("div");
+    const chat = document.createElement("div");
 
-    wrapper.className = sender === "user"
-        ? "chat chat-end"
-        : "chat chat-start";
+    let tokenText = "";
+
+    if (tokens) {
+        tokenText = `<div class="text-xs opacity-60 mt-1">Tokens: ${tokens}</div>`;
+    }
+
+    if (sender === "user") {
+        chat.className = "chat chat-end";
+    } else {
+        chat.className = "chat chat-start";
+    }
 
     const safeHtml = DOMPurify.sanitize(micromark(String(text)));
 
-    wrapper.innerHTML = `
-    <div class="chat-bubble bg-pink-200 text-black">
-      ${safeHtml}
-      ${tokens ? `<div class="text-xs opacity-60 mt-1">Tokens: ${tokens}</div>` : ""}
-    </div>
-  `;
 
-    messages.appendChild(wrapper);
+    chat.innerHTML = `
+        <div class="chat-bubble bg-pink-200 text-black">
+            ${safeHtml}
+            ${tokenText}
+        </div>
+    `;
+
+    messages.appendChild(chat);
     messages.scrollTop = messages.scrollHeight;
 }
 
@@ -37,24 +46,26 @@ form.addEventListener("submit", async (e) => {
     input.value = "";
     button.disabled = true;
 
-    const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt }),
-    });
+    try {
+        const res = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ prompt }),
+        });
 
-    const data = await res.json();
+        const data = await res.json();
 
-    if (data.error) {
-        addMessage(data.error, "bot");
-    } else {
+        if (!res.ok || data.error) {
+            addMessage(data.error || "Server error", "bot");
+            return;
+        }
+
         addMessage(data.message, "bot", data.tokens);
-    }
 
-
-    {
+    } catch (error) {
+        console.error(error);
         addMessage("Server error", "bot");
     }
 

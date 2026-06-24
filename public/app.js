@@ -37,24 +37,24 @@ form.addEventListener("submit", async (e) => {
     input.value = "";
     button.disabled = true;
 
-    try {
-        const res = await fetch("/api/chat", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ prompt }),
-        });
+    const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt }),
+    });
 
-        const data = await res.json();
+    const data = await res.json();
 
-        if (data.error) {
-            addMessage(data.error, "bot");
-        } else {
-            addMessage(data.message, "bot", data.tokens);
-        }
+    if (data.error) {
+        addMessage(data.error, "bot");
+    } else {
+        addMessage(data.message, "bot", data.tokens);
+    }
 
-    } catch (err) {
+
+    {
         addMessage("Server error", "bot");
     }
 

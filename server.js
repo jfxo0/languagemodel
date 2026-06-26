@@ -1,5 +1,5 @@
 import express from "express";
-import { callOpenAI } from "../chat.js";
+import { callOpenAI } from "./api/chat.js";
 
 const app = express();
 
